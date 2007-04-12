@@ -291,3 +291,18 @@ INSERT INTO cm_shoptag (shopcodestart, shopcodeend,  htmlcodestart, htmlcodeend,
 go
 INSERT INTO cm_shoptag (shopcodestart, shopcodeend,  htmlcodestart, htmlcodeend, inserttimestamp, updatetimestamp) VALUES ('[li]', '[/li]', '<li>', '</li>','2005-02-11 14:36:28.324', '2004-02-11 14:36:28.324')
 go
+
+INSERT INTO cm_shoporderstate(name) VALUES ('Open');
+go
+INSERT INTO cm_shoporderstate(name) VALUES ('Completed');
+go
+INSERT INTO cm_shoporderstate(name) VALUES ('Cancelled');
+go
+INSERT INTO cm_shoporderstate(name) VALUES ('Modified');
+go
+INSERT INTO cm_shoporderstate(name) VALUES ('Payed');
+go
+INSERT INTO cm_shoporderstate(name) VALUES ('Delivered');
+go
+INSERT INTO cm_shoporderstate(name) VALUES ('Suspended');
+go
