@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Cuyahoga.Modules.Shop.Domain.ShopProduct, Cuyahoga.Modules.Shop" table="cm_shopproduct">
+		<id name="Id" column="productid" type="Int32" unsaved-value="-1">
+			<generator class="native">
+				<param name="sequence">cm_shop_shopproductid_seq</param>
+			</generator>
+		</id>
+
+		<timestamp name="DateModified" column="updatetimestamp" />
+
+		<property name="DateCreated" column="inserttimestamp" type="DateTime" />
+		<property name="ShopId" column="shopid" type="Int32" />
+		<property name="Title" column="title" type="String" length="50" />
+		<property name="UserId" column="userid" type="Int32" />
+		<property name="UserName" column="username" type="String" length="50" />
+		<property name="Ip" column="ip" type="String" length="15" />
+		<property name="Message" column="message" type="StringClob" />
+		<property name="Views" column="views" type="Int32" />
+		<property name="Comments" column="comments" type="Int32" />
+    <property name="Price" column="price" type="Decimal" />
+  </class>
+</hibernate-mapping>

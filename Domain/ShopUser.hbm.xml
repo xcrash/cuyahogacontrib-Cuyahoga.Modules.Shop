@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Cuyahoga.Modules.Shop.Domain.ShopUser, Cuyahoga.Modules.Shop" table="cm_shopuser">
+		<id name="Id" column="shopuserid" type="Int32" unsaved-value="-1">
+			<generator class="native">
+				<param name="sequence">cm_shop_shopuserid_seq</param>
+			</generator>
+		</id>
+
+		<timestamp name="DateModified" column="updatetimestamp" />
+
+		<property name="DateCreated" column="inserttimestamp" type="DateTime" />
+		<property name="UserId" column="userid" type="Int32" not-null="false" />
+	</class>
+</hibernate-mapping>

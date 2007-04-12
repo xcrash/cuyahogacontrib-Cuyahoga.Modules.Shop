@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Cuyahoga.Modules.Shop.Domain.ShopEmoticon, Cuyahoga.Modules.Shop" table="cm_shopemoticon">
+		<id name="Id" column="emoticonid" type="Int32" unsaved-value="-1">
+			<generator class="native">
+				<param name="sequence">cm_shop_emoticonid_seq</param>
+			</generator>
+		</id>
+		<timestamp name="DateModified" column="updatetimestamp" />
+		<property name="DateCreated" column="inserttimestamp" type="DateTime" />
+		<property name="TextVersion" column="textversion" type="String" length="50" />
+		<property name="ImageName" column="imagename" type="String" length="254" />
+	</class>
+</hibernate-mapping>

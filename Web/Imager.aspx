@@ -1,0 +1,1 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Imager.aspx.cs" Inherits="Cuyahoga.Modules.Shop.Web.Imager" %>

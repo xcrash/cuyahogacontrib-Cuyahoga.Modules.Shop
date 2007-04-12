@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Cuyahoga.Modules.Shop.Domain.ShopImage, Cuyahoga.Modules.Shop" table="cm_shopimage">
+		<id name="Id" column="imageid" type="Int32" unsaved-value="-1">
+			<generator class="native">
+				<param name="sequence">cm_shop_imageid_seq</param>
+			</generator>
+		</id>
+
+		<timestamp name="DateModified" column="updatetimestamp" />
+		<property name="DateCreated" column="inserttimestamp" type="DateTime" />
+		<property name="OrigImageName" column="origimagename" type="String" length="254" />
+		<property name="ShopImageName" column="shopimagename" type="String" length="254" />
+		<property name="ImageSize" column="imagesize" type="Int32" />
+    <property name="ProductId" column="productid" type="Int32" />
+    <property name="ContentType" column="contenttype" type="String" length="50" />
+	</class>
+</hibernate-mapping>

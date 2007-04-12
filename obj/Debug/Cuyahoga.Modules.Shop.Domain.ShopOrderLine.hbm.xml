@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Cuyahoga.Modules.Shop.Domain.ShopOrderLine, Cuyahoga.Modules.Shop" table="cm_shoporderline">
+    <id name="Id" column="shoporderlineid" type="Int32" unsaved-value="-1">
+      <generator class="native">
+        <param name="sequence">cm_shop_orderlineid_seq</param>
+      </generator>
+    </id>
+    <many-to-one name="ShopOrder" class="Cuyahoga.Modules.Shop.Domain.ShopOrder, Cuyahoga.Modules.Shop" column="shoporderid"  cascade="none" />
+    <many-to-one name="Product" class="Cuyahoga.Modules.Shop.Domain.ShopProduct, Cuyahoga.Modules.Shop" column="productid" cascade="none" />
+  </class>
+</hibernate-mapping>
