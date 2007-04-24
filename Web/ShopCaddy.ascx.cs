@@ -26,6 +26,7 @@ namespace Cuyahoga.Modules.Shop
             try
             {
                 this._module = base.Module as ShopModule;
+                this._shopShop = this._module.GetShopById(this._module.CurrentShopId);
                 // Add the CSS
                 string cssfile = String.Format("{0}Modules/Shop/Images/Standard/shop.css", UrlHelper.GetApplicationPath());
                 this.RegisterStylesheet("shopcss", cssfile);
@@ -64,7 +65,7 @@ namespace Cuyahoga.Modules.Shop
 
         private void Translate()
         {
-            //this.lblShopName.Text = this._shopShop.Name;
+            this.lblShopName.Text = this._shopShop.Name;
         }
 
         private void BindShopCaddy()

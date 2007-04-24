@@ -73,6 +73,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Web\bin\Nullables.NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="paypal_base, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b37401294aaf5617">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\PayPal ASP.NET SDK\samples\AspNet\bin\paypal_base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -106,20 +110,27 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\AdminEditEmoticon.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AdminEditEmoticon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\AdminEditShop.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AdminEditShop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\AdminEditTag.aspx.cs">
       <DependentUpon>AdminEditTag.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\AdminShop.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AdminShop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\ShopPayment.ascx.cs">
+      <DependentUpon>ShopPayment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\ShopPayment.ascx.designer.cs">
+      <DependentUpon>ShopPayment.ascx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopCaddy.ascx.cs">
       <DependentUpon>ShopCaddy.ascx</DependentUpon>
@@ -136,16 +147,16 @@
       <DependentUpon>Imager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopCategoryList.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopCategoryList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopFooter.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopFooter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopList.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopNewComment.ascx.cs">
       <DependentUpon>ShopNewComment.ascx</DependentUpon>
@@ -155,29 +166,39 @@
       <DependentUpon>ShopNewProduct.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ShopProfile.ascx.cs">
+    <Compile Include="Web\ShopPayPal.ascx.cs">
+      <DependentUpon>ShopPayPal.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\ShopPayPal.ascx.designer.cs">
+      <DependentUpon>ShopPayPal.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\ShopProfile.ascx.cs">
+      <DependentUpon>ShopProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\ShopProfile.ascx.designer.cs">
       <DependentUpon>ShopProfile.ascx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopSearch.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopTop.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopTop.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopView.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopViewProduct.ascx.cs">
       <DependentUpon>ShopViewProduct.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\ShopViewProfile.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ShopViewProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -209,8 +230,6 @@
     <EmbeddedResource Include="Domain\ShopOrderState.hbm.xml" />
     <Content Include="Install\Database\mssql2000\install.sql" />
     <Content Include="Install\Database\mssql2000\uninstall.sql" />
-    <Content Include="Install\Database\mysql\install.sql" />
-    <Content Include="Install\Database\mysql\uninstall.sql" />
     <Content Include="Web\AdminEditCategory.aspx" />
     <Content Include="Web\AdminEditEmoticon.aspx">
       <SubType>ASPXCodeBehind</SubType>
@@ -220,6 +239,7 @@
     <Content Include="Web\AdminShop.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Web\ShopPayment.ascx" />
     <Content Include="Web\ShopCaddy.ascx" />
     <Content Include="Web\Imager.aspx" />
     <Content Include="Web\shop.js" />
@@ -230,6 +250,7 @@
     </Content>
     <Content Include="Web\ShopNewComment.ascx" />
     <Content Include="Web\ShopNewProduct.ascx" />
+    <Content Include="Web\ShopPayPal.ascx" />
     <Content Include="Web\ShopProfile.ascx" />
     <Content Include="Web\ShopSearch.ascx" />
     <Content Include="Web\ShopTop.ascx" />

@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="ShopProfile.ascx.cs" Inherits="Cuyahoga.Modules.Shop.ShopProfile" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ShopProfile.ascx.cs" Inherits="Cuyahoga.Modules.Shop.Web.ShopProfile" %>
 <%@ Register TagPrefix="cc1" Namespace="Cuyahoga.ServerControls" Assembly="Cuyahoga.ServerControls" %>
 <asp:placeholder id="phShopTop" runat="server"></asp:placeholder><asp:panel id="pnlProfile" runat="server" CssClass="articlesub">
 	<TABLE id="tblProfile" cellSpacing="1" cellPadding="1" width="100%" border="0">
@@ -90,8 +90,8 @@
 		<TR>
 			<TD vAlign="top"></TD>
 			<TD>
-				<asp:Button id="btnSave" runat="server" CssClass="shop" Text="Save"></asp:Button>&nbsp;
-				<asp:Button id="btnCancel" runat="server" CssClass="shop" Text="Cancel" CausesValidation="False"></asp:Button></TD>
+				<asp:Button id="btnSave" runat="server" CssClass="shop" Text="Save" OnClick="btnSave_Click"></asp:Button>&nbsp;
+				<asp:Button id="btnCancel" runat="server" CssClass="shop" Text="Cancel" CausesValidation="False" OnClick="btnCancel_Click"></asp:Button></TD>
 		</TR>
 	</TABLE>
 </asp:panel><asp:placeholder id="phShopFooter" runat="server"></asp:placeholder>
