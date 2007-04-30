@@ -27,9 +27,6 @@ go
 DROP TABLE cm_shoptag
 go
 
-DROP TABLE cm_shopuser
-go
-
 DROP TABLE cm_shopimage
 go
 

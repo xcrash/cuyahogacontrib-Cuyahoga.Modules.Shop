@@ -38,24 +38,6 @@ namespace Cuyahoga.Modules.Shop {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// lblShopName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblShopName;
-        
-        /// <summary>
-        /// hplNewTitle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hplNewTitle;
-        
-        /// <summary>
         /// rptShopCaddyList control.
         /// </summary>
         /// <remarks>
@@ -63,6 +45,15 @@ namespace Cuyahoga.Modules.Shop {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptShopCaddyList;
+        
+        /// <summary>
+        /// ButtonCheckout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonCheckout;
         
         /// <summary>
         /// phShopFooter control.

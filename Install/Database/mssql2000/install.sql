@@ -165,22 +165,8 @@ CREATE TABLE cm_shoptag(
 
 GO
 
-CREATE TABLE cm_shopuser(
-	shopuserid int IDENTITY(1,1) NOT NULL,
-	updatetimestamp datetime NULL,
-	inserttimestamp datetime NULL,
-	userid int NULL,
- CONSTRAINT PK_cm_shopuser PRIMARY KEY CLUSTERED 
-(
-	shopuserid ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-Go
-
 CREATE TABLE cm_shopuseraddress(
 	addressid int IDENTITY(1,1) NOT NULL,
-	userid int NOT NULL,
 	address1 nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
 	address2 nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
 	zip nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
@@ -190,6 +176,9 @@ CREATE TABLE cm_shopuseraddress(
 	telephone1 nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
 	telephone2 nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
 	mobile nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
+	firstname nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,
+	lastname nvarchar(254) COLLATE Chinese_PRC_CI_AS NULL,	
+	[userid] [int] NULL,
 	delivery int NULL,
  CONSTRAINT PK_cm_address PRIMARY KEY CLUSTERED 
 (
@@ -198,7 +187,6 @@ CREATE TABLE cm_shopuseraddress(
 ) ON [PRIMARY]
 
 GO
-
 
 /*
  *  Foreign Keys
@@ -236,15 +224,11 @@ GO
 ALTER TABLE cm_shopproduct  WITH NOCHECK ADD  CONSTRAINT FK_cm_shopproduct_cm_shop FOREIGN KEY(shopid)
 REFERENCES cm_shop (shopid)
 GO
-ALTER TABLE cm_shopuser  WITH NOCHECK ADD  CONSTRAINT FK_cm_shopuser_cuyahoga_user FOREIGN KEY(userid)
-REFERENCES cuyahoga_user (userid)
 GO
-ALTER TABLE cm_shopuseraddress  WITH NOCHECK ADD  CONSTRAINT FK_cm_shopuseraddress_cuyahoga_user FOREIGN KEY(userid)
-REFERENCES cuyahoga_user (userid)
+ALTER TABLE [cm_shopuseraddress]  WITH NOCHECK ADD  CONSTRAINT [FK_cm_shopuseraddress_cuyahoga_user] FOREIGN KEY([userid])
+REFERENCES [cuyahoga_user] ([userid])
 GO
-ALTER TABLE cm_shopuseraddress NOCHECK CONSTRAINT FK_cm_shopuseraddress_cuyahoga_user
-
-ALTER TABLE cm_shopuser NOCHECK CONSTRAINT FK_cm_shopuser_cuyahoga_user
+ALTER TABLE [cm_shopuseraddress] NOCHECK CONSTRAINT [FK_cm_shopuseraddress_cuyahoga_user]
 
 ALTER TABLE cm_shopproduct NOCHECK CONSTRAINT FK_cm_shopproduct_cm_shop
 
@@ -272,6 +256,8 @@ INSERT INTO cuyahoga_moduletype (name, assemblyname, classname, path, editpath, 
 SELECT @moduletypeid = Scope_Identity()
 
 INSERT INTO cuyahoga_version (assembly, major, minor, patch) VALUES ('Cuyahoga.Modules.Shop', 1, 5, 0)
+go
+INSERT INTO cuyahoga_modulesetting (moduletypeid, name, friendlyname, settingdatatype, iscustomtype, isrequired) VALUES (@moduletypeid, 'ALLOW_COMMENTS', 'Allow comments', 'System.Boolean', 0, 1)
 go
 INSERT INTO cm_shopemoticon (textversion, imagename,  inserttimestamp, updatetimestamp) VALUES ('8)', 'cool.gif', '2005-02-11 14:36:28.324', '2004-02-11 14:36:28.324')
 go

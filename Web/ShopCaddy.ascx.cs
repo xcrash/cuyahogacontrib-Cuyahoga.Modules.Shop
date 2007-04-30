@@ -19,14 +19,12 @@ namespace Cuyahoga.Modules.Shop
     public partial class ShopCaddy : BaseModuleControl
     {
         private ShopModule _module;
-        private ShopShop _shopShop;
         
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 this._module = base.Module as ShopModule;
-                this._shopShop = this._module.GetShopById(this._module.CurrentShopId);
                 // Add the CSS
                 string cssfile = String.Format("{0}Modules/Shop/Images/Standard/shop.css", UrlHelper.GetApplicationPath());
                 this.RegisterStylesheet("shopcss", cssfile);
@@ -40,7 +38,6 @@ namespace Cuyahoga.Modules.Shop
 
                 this.BindTopFooter();
                 base.LocalizeControls();
-                this.Translate();
             }
             catch (Exception ex)
             {
@@ -61,11 +58,6 @@ namespace Cuyahoga.Modules.Shop
             tShopFooter = (ShopFooter)this.LoadControl("~/Modules/Shop/ShopFooter.ascx");
             tShopFooter.Module = this._module;
             this.phShopFooter.Controls.Add(tShopFooter);
-        }
-
-        private void Translate()
-        {
-            this.lblShopName.Text = this._shopShop.Name;
         }
 
         private void BindShopCaddy()
@@ -95,6 +87,24 @@ namespace Cuyahoga.Modules.Shop
                 dTotal += product.Price;
             }
             return String.Format("{0:c}", dTotal);
+        }
+
+        protected void rptShopCaddyList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Remove")
+            {
+                int orderLineId = int.Parse(((HiddenField)e.Item.FindControl("OrderLineId")).Value);
+                ShopOrderLine orderLine = this._module.GetShopOrderLine(orderLineId);
+                this._module.CurrentShopOrder.OrderLines.Remove(orderLine);
+                this._module.SaveOrder(this._module.CurrentShopOrder);
+
+                this.BindShopCaddy();
+            }
+        }
+
+        protected void ButtonCheckout_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

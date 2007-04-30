@@ -732,98 +732,84 @@ namespace Cuyahoga.Modules.Shop
 
 		#endregion
 
-		#region Shop user
-		public ShopUser GetShopUserById(int tId)
+		#region Shop user address
+
+        public IList GetShopUserAddress(Cuyahoga.Core.Domain.User user)
 		{
+            IList addressList;
             ISession session = this._sessionManager.OpenSession();
             try
-			{
-                return (ShopUser)session.Load(typeof(ShopUser), tId);
-			}
-			catch (Exception ex)
-			{
-                throw new Exception("Unable to get user by id" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
-			}
+            {
+
+                ICriteria criteria = session.CreateCriteria(typeof(ShopUserAddress)).Add(Expression.Eq("User", user));
+                addressList = criteria.List();
+
+
+                return addressList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get address for user " + user.Name, ex);
+            }
 		}
 
-		public IList GetAllShopUsers()
-		{
+
+        /// <summary>
+        /// Get the meta-information for user address.
+        /// </summary>
+        /// <param name="fileId"></param>
+        /// <returns></returns>
+        public ShopUserAddress GetShopUserAddress(int id)
+        {
             ISession session = this._sessionManager.OpenSession();
             try
-			{
-                IList users = session.CreateCriteria(typeof(ShopUser)).List();
-                return users;
-			}
-			catch (Exception ex)
-			{
-                throw new Exception("Unable to get users " + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
-			}
-		}
-
+            {
+                return (ShopUserAddress)session.Load(typeof(ShopUserAddress), id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get Shop user address for identifier: " + id.ToString(), ex);
+            }
+        }
 
         [Transaction(TransactionMode.RequiresNew)]
-        public void SaveShopUser(ShopUser user)
+        public void SaveShopUserAddress(ShopUserAddress address)
 		{
             ISession session = this._sessionManager.OpenSession();
             NHibernate.ITransaction tx = session.BeginTransaction();
             try
             {
-                session.SaveOrUpdate(user);
+                session.SaveOrUpdate(address);
                 tx.Commit();
                 session.Close();
 			}
 			catch (Exception ex)
 			{
                 tx.Rollback();
-                throw new Exception("Unable to save Tag " + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
+                throw new Exception("Unable to save address " + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
 			}
 		}
 
         [Transaction(TransactionMode.RequiresNew)]
-        public void DeleteShopUser(ShopUser user)
+        public void DeleteShopUserAddress(ShopUserAddress address)
 		{
             ISession session = this._sessionManager.OpenSession();
             NHibernate.ITransaction tx = session.BeginTransaction();
             try
             {
-                session.Delete(user);
+                session.Delete(address);
                 tx.Commit();
                 session.Close();
 			}
 			catch (Exception ex)
 			{
                 tx.Rollback();
-                throw new Exception("Unable to delete user" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
+                throw new Exception("Unable to delete address" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
 			}
-		}
-
-		public ShopUser GetShopUserByUserId(int tId)
-		{
-            ISession session = this._sessionManager.OpenSession();
-            IList l;
-			ShopUser user = new ShopUser();
-			try
-			{
-                l = session.Find("from ShopUser f where f.UserId=?", tId, NHibernateUtil.Int32);
-				if(l.Count == 0)
-				{
-					return null;
-				}
-				else
-				{
-					user = (ShopUser)l[0];
-				}
-				
-			}
-			catch (Exception ex)
-			{
-                throw new Exception("Unable to get user by id" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
-			}
-
-			return user;
 		}
 
 		#endregion
+
 
         #region Orders
 
@@ -900,6 +886,30 @@ namespace Cuyahoga.Modules.Shop
             catch (Exception ex)
             {
                 throw new Exception("Unable to get orders for user " + owner.Id, ex);
+            }
+        }
+
+
+        #endregion
+
+        #region OrderLines
+
+
+        /// <summary>
+        /// Get the meta-information for one ShopOrderLine.
+        /// </summary>
+        /// <param name="fileId"></param>
+        /// <returns></returns>
+        public ShopOrderLine GetShopOrderLine(int id)
+        {
+            ISession session = this._sessionManager.OpenSession();
+            try
+            {
+                return (ShopOrderLine)session.Load(typeof(ShopOrderLine), id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get ShopOrderLine by identifier: " + id.ToString(), ex);
             }
         }
 
@@ -1026,5 +1036,14 @@ namespace Cuyahoga.Modules.Shop
 		ShopViewProfile,
         ShopCaddy
 	}
+
+    /// <summary>
+    /// The display mode of the module.
+    /// </summary>
+    public enum CheckoutType
+    {
+        Email,
+        PayPal
+    }
 
 }

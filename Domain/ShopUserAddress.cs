@@ -3,15 +3,13 @@ using System.Collections;
 using System.Configuration;
 using System.Web;
 using System.Web.Caching;
+using Cuyahoga.Core.Domain;
 
 namespace Cuyahoga.Modules.Shop.Domain
 {
 	public class ShopUserAddress
 	{
         private int _addressid;
-		private DateTime	_dateCreated;
-		private DateTime	_dateModified;
-		private int	_userId;
         private string _address1;
         private string _address2;
         private string _zip;
@@ -21,31 +19,16 @@ namespace Cuyahoga.Modules.Shop.Domain
         private string _telephone1;
         private string _telephone2;
         private string _mobile;
-		private int	_delivery;
+        private string _firstname;
+        private string _lastname;
+        private int _delivery;
+        private User _user;
 
 		#region Properties
 		public int AddressId
 		{
 			get { return this._addressid; }
             set { this._addressid = value; }
-		}
-
-		public DateTime DateModified
-		{
-			get { return this._dateModified; }
-			set { this._dateModified = value; }
-		}
-
-		public DateTime DateCreated
-		{
-			get { return this._dateCreated; }
-			set { this._dateCreated = value; }
-		}
-
-        public int UserId
-		{
-			get { return this._userId; }
-			set { this._userId = value; }
 		}
 
         public string Address1
@@ -106,15 +89,30 @@ namespace Cuyahoga.Modules.Shop.Domain
             get { return this._delivery; }
             set { this._delivery = value; }
         }
-	 	
+        
+        public string Firstname
+        {
+            get { return this._firstname; }
+            set { this._firstname = value; }
+        }
+        
+        public string Lastname
+        {
+            get { return this._lastname; }
+            set { this._lastname = value; }
+        }
+
+        public User User
+        {
+            get { return _user; }
+            set { _user = value; }
+        }
 	
 		#endregion
 
         public ShopUserAddress()
 		{
             this._addressid = -1;
-			this._dateCreated		= DateTime.Now;
-			this._dateModified		= DateTime.Now;
 		}
 	}
 }

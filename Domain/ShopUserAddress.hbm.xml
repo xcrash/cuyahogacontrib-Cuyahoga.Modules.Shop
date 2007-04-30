@@ -6,9 +6,8 @@
 				<param name="sequence">cm_shop_shopaddressid_seq</param>
 			</generator>
 		</id>
-		<timestamp name="DateModified" column="updatetimestamp" />
-		<property name="DateCreated" column="inserttimestamp" type="DateTime" />
-    <property name="UserId" column="userid" type="Int32" not-null="false" />
+    <property name="Firstname" column="firstname" type="String" length="254" />
+    <property name="Lastname" column="lastname" type="String" length="254" />
     <property name="Address1" column="address1" type="String" length="254" />
     <property name="Address2" column="address2" type="String" length="254" />
     <property name="Zip" column="zip" type="String" length="254" />
@@ -19,5 +18,6 @@
     <property name="Telephone2" column="telephone2" type="String" length="254" />
     <property name="Mobile" column="mobile" type="String" length="254" />
     <property name="Delivery" column="delivery" type="Int32" />
+    <many-to-one name="User" class="Cuyahoga.Core.Domain.User, Cuyahoga.Core" column="userid" cascade="none" not-null="true" />
   </class>
 </hibernate-mapping>

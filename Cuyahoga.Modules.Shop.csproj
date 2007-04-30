@@ -98,7 +98,6 @@
     <Compile Include="Domain\ShopTag.cs" />
     <Compile Include="Domain\ShopOrder.cs" />
     <Compile Include="Domain\ShopOrderLine.cs" />
-    <Compile Include="Domain\ShopUser.cs" />
     <Compile Include="Domain\ShopUserAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopModule.cs">
@@ -196,10 +195,6 @@
       <DependentUpon>ShopViewProduct.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ShopViewProfile.ascx.cs">
-      <DependentUpon>ShopViewProfile.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Cuyahoga.Core.csproj">
@@ -224,7 +219,6 @@
     <EmbeddedResource Include="Domain\ShopTag.hbm.xml" />
     <EmbeddedResource Include="Domain\ShopOrder.hbm.xml" />
     <EmbeddedResource Include="Domain\ShopOrderLine.hbm.xml" />
-    <EmbeddedResource Include="Domain\ShopUser.hbm.xml" />
     <EmbeddedResource Include="Domain\ShopUserAddress.hbm.xml" />
     <EmbeddedResource Include="Domain\ShopComment.hbm.xml" />
     <EmbeddedResource Include="Domain\ShopOrderState.hbm.xml" />
@@ -258,7 +252,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Web\ShopViewProduct.ascx" />
-    <Content Include="Web\ShopViewProfile.ascx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.da.resx">
