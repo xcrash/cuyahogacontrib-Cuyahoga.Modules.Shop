@@ -106,5 +106,10 @@ namespace Cuyahoga.Modules.Shop
         {
 
         }
+
+        protected void ButtonContinueShopping_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(String.Format("{0}", UrlHelper.GetUrlFromSection(this._module.Section)));
+        }
     }
 }

@@ -66,8 +66,8 @@
 </asp:Panel>
 <p>
 </p>
-<asp:Button ID="ButtonCheckout" runat="server" OnClick="ButtonCheckout_Click" />
-<br />
+<asp:Button ID="ButtonContinueShopping" runat="server" OnClick="ButtonContinueShopping_Click" />
+<asp:Button ID="ButtonCheckout" runat="server" OnClick="ButtonCheckout_Click" /><br />
 <br />
 <asp:PlaceHolder ID="phShopFooter" runat="server"></asp:PlaceHolder>
 &nbsp;
