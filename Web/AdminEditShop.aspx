@@ -21,22 +21,22 @@
 							<td><asp:textbox id="txtName" runat="server" width="592px"></asp:textbox><asp:requiredfieldvalidator id="rfvTitle" runat="server" cssclass="validator" display="Dynamic" errormessage="Name is required"
 									enableclientscript="False" controltovalidate="txtName"></asp:requiredfieldvalidator></td>
 						</tr>
-						<TR>
-							<TD style="WIDTH: 139px; HEIGHT: 61px" vAlign="top">Description</TD>
-							<TD style="HEIGHT: 61px">
+						<tr>
+							<td style="WIDTH: 139px; HEIGHT: 61px" vAlign="top">Description</td>
+							<td style="HEIGHT: 61px">
 								<asp:TextBox id="txtDescription" runat="server" Width="592px" TextMode="MultiLine"></asp:TextBox>
-								<asp:RequiredFieldValidator id="rfvDescription" runat="server" ErrorMessage="Description is required" ControlToValidate="txtDescription"></asp:RequiredFieldValidator></TD>
-						</TR>
-						<TR>
-							<TD style="WIDTH: 139px">Category</TD>
-							<TD>
-								<asp:DropDownList id="lstCategories" runat="server"></asp:DropDownList></TD>
-						</TR>
-						<TR>
-							<TD style="WIDTH: 139px">Allow GuestProduct</TD>
-							<TD>
-								<asp:CheckBox id="ckbAllowGuestProduct" runat="server"></asp:CheckBox></TD>
-						</TR>
+								<asp:RequiredFieldValidator id="rfvDescription" runat="server" ErrorMessage="Description is required" ControlToValidate="txtDescription"></asp:RequiredFieldValidator></td>
+						</tr>
+						<tr>
+							<td style="WIDTH: 139px">Category</td>
+							<td>
+								<asp:DropDownList id="lstCategories" runat="server"></asp:DropDownList></td>
+						</tr>
+						<tr>
+							<td style="WIDTH: 139px">Allow GuestProduct</td>
+							<td>
+								<asp:CheckBox id="ckbAllowGuestProduct" runat="server"></asp:CheckBox></td>
+						</tr>
 					</table>
 				</div>
 				<p><asp:button id="btnSave" runat="server" text="Save"></asp:button><asp:button id="btnDelete" runat="server" text="Delete" visible="False"></asp:button><input id="btnCancel" type="button" value="Cancel" runat="server"></p>

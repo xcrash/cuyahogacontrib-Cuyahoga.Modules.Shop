@@ -6,8 +6,11 @@ using System.ComponentModel;
 using System.Collections;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using System.IO;
 
 using Cuyahoga.Modules.Shop.Domain;
 using Cuyahoga.Web.Util;
@@ -29,6 +32,67 @@ namespace Cuyahoga.Modules.Shop.Utils
 		{
 			return "";
 		}
+
+        public static Bitmap ImageResize(Byte[] imagein, int width)
+        {
+
+            MemoryStream ms = new MemoryStream();
+            ms.Write(imagein, 0, imagein.Length);
+            Bitmap bmpImage = (Bitmap)System.Drawing.Image.FromStream(ms);
+           
+            /*
+            // Get an ImageCodecInfo object that represents the JPEG codec.
+            ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+            // EncoderParameter object in the array.
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+            // for the Quality parameter category.
+            Encoder myEncoder = Encoder.Quality;
+
+            // Save the bitmap as a JPEG file with quality level 75.
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 92L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+
+            ms = new MemoryStream();
+            bmpImage.Save(ms, myImageCodecInfo, myEncoderParameters);
+            
+            bmpImage = (Bitmap)System.Drawing.Image.FromStream(ms);
+            */
+
+            int x = bmpImage.Width;
+            int y = bmpImage.Height;
+
+            x = width;
+            y = (x * bmpImage.Height) / bmpImage.Width;
+
+            if (x < bmpImage.Width || y < bmpImage.Height)
+            {
+                Bitmap thumb = new Bitmap(x,y);
+                Graphics g = Graphics.FromImage(thumb);
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(bmpImage, 0, 0, x, y);
+                bmpImage = thumb;
+            }
+
+            return bmpImage;
+        }
+
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
 
 		public static DataTable TimeZones() 
 		{

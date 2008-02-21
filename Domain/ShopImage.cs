@@ -20,6 +20,8 @@ namespace Cuyahoga.Modules.Shop.Domain
 		private string		_contenttype;
 		private DateTime	_dateCreated;
 		private DateTime	_dateModified;
+        private Byte[] _data;
+        private int _isdefault;
 
 		#region Properties
 		/// <summary>
@@ -78,6 +80,16 @@ namespace Cuyahoga.Modules.Shop.Domain
             get { return this._productid; }
             set { this._productid = value; }
 		}
+        public Byte[] Data
+        {
+            get { return _data; }
+            set { _data = value; }
+        }
+        public int IsDefault
+        {
+            get { return this._isdefault; }
+            set { this._isdefault = value; }
+        }
         
 		#endregion
 
@@ -94,6 +106,7 @@ namespace Cuyahoga.Modules.Shop.Domain
 			this._dateCreated		= DateTime.Now;
 			this._dateModified		= DateTime.Now;
             this._productid = -1;
+            this._isdefault = 0;
 		}
 	}
 }

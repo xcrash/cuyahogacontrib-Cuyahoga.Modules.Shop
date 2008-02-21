@@ -11,50 +11,63 @@ using System.Web.UI.HtmlControls;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.IO;
+
+using System.Net;
+using System.Text.RegularExpressions;
+
 using Cuyahoga.Web.Util;
+using Cuyahoga.Core.Util;
+using Cuyahoga.Web.UI;
+using Cuyahoga.Modules.Shop;
+using Cuyahoga.Modules.Shop.Domain;
+using Cuyahoga.Modules.Shop.Utils;
 
 namespace Cuyahoga.Modules.Shop.Web
 {
-    public partial class Imager : System.Web.UI.Page
+    public partial class Imager : BaseModuleControl
     {
+        private ShopModule _module;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                if (Request.QueryString["Image"] != null)
+                this._module = base.Module as ShopModule;
+                if (Request.QueryString["ImageId"] != null)
                 {
-                    Bitmap objImage = new Bitmap(HttpContext.Current.Request.PhysicalApplicationPath + Request.QueryString["Image"]);
+
+                    MemoryStream ms = new MemoryStream(this._module.GetShopImageById(int.Parse(Request.QueryString["ImageId"])).Data);
+
+                    Bitmap bmpImage = new Bitmap(ms);
+                    byte[] bufferImage;
+
+                    int x = bmpImage.Width;
+                    int y = bmpImage.Height;
+
                     if (Request.QueryString["ImageOutputWidth"] != null)
                     {
-                        int iWidth = int.Parse(Request.QueryString["ImageOutputWidth"]);
-                        Bitmap objImage2 = new Bitmap(objImage, iWidth, (objImage.Height * iWidth) / objImage.Width);
-                        objImage = objImage2;
+                        x = int.Parse(Request.QueryString["ImageOutputWidth"]);
+                        y = (x * bmpImage.Height) / bmpImage.Width;
                     }
-                    objImage.Save(Response.OutputStream, ImageFormat.Jpeg);
-                    /*
-                    if ( objImage.RawFormat.Equals( ImageFormat.Jpeg ) )
-                    {
-                        objImage.Save(Response.OutputStream, ImageFormat.Jpeg);
-                    }
-                    else if (objImage.RawFormat.Equals(ImageFormat.Gif))
-                    {
-                        objImage.Save(Response.OutputStream, ImageFormat.Gif);
-                    }
-                    else if (objImage.RawFormat.Equals(ImageFormat.Bmp))
-                    {
-                        objImage.Save(Response.OutputStream, ImageFormat.Bmp);
-                    }
-                    else if (objImage.RawFormat.Equals(ImageFormat.Png))
-                    {
-                        objImage.Save(Response.OutputStream, ImageFormat.Png);
-                    }
-                    else
-                    {
-                        Response.Write("Wrong image format: " + objImage.RawFormat.ToString());
-                    }
-                     * */
 
-                    objImage.Dispose();
+                    if (x < bmpImage.Width || y < bmpImage.Height)
+                    {
+                        Size scale = new Size(x, y);
+                        bmpImage = new Bitmap(bmpImage, scale);
+                    }
+
+                    ms = new MemoryStream();
+                    bmpImage.Save(ms, ImageFormat.Jpeg);
+
+                    bufferImage = new byte[(int)ms.Length];
+
+                    ms.Position = 0;
+                    for (int i = 0; i < (int)ms.Length; i++)
+                    {
+                        bufferImage[i] = (byte)ms.ReadByte();
+                    }
+                 
+                    this.Response.BinaryWrite(bufferImage);
                 }
             }
             catch (Exception ex)

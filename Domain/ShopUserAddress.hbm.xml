@@ -6,8 +6,6 @@
 				<param name="sequence">cm_shop_shopaddressid_seq</param>
 			</generator>
 		</id>
-    <property name="Firstname" column="firstname" type="String" length="254" />
-    <property name="Lastname" column="lastname" type="String" length="254" />
     <property name="Address1" column="address1" type="String" length="254" />
     <property name="Address2" column="address2" type="String" length="254" />
     <property name="Zip" column="zip" type="String" length="254" />

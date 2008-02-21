@@ -21,27 +21,27 @@
 							<td><asp:textbox id="txtShopCodeStart" runat="server" width="592px"></asp:textbox><asp:requiredfieldvalidator id="rfvShopCodeStart" runat="server" cssclass="validator" display="Dynamic" errormessage="Shop start code is required"
 									enableclientscript="False" controltovalidate="txtShopCodeStart"></asp:requiredfieldvalidator></td>
 						</tr>
-						<TR>
-							<TD style="WIDTH: 137px">Shop code end</TD>
-							<TD>
+						<tr>
+							<td style="WIDTH: 137px">Shop code end</td>
+							<td>
 								<asp:textbox id="txtShopCodeEnd" runat="server" width="592px"></asp:textbox>
 								<asp:requiredfieldvalidator id="rfvShopCodeEnd" runat="server" controltovalidate="txtShopCodeEnd" enableclientscript="False"
-									errormessage="Shop code end is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></TD>
-						</TR>
-						<TR>
-							<TD style="WIDTH: 137px">HTML code start</TD>
-							<TD>
+									errormessage="Shop code end is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></td>
+						</tr>
+						<tr>
+							<td style="WIDTH: 137px">HTML code start</td>
+							<td>
 								<asp:textbox id="txtHtmlCodeStart" runat="server" width="592px"></asp:textbox>
 								<asp:requiredfieldvalidator id="rfvHtmlCodeStart" runat="server" controltovalidate="txtHtmlCodeStart" enableclientscript="False"
-									errormessage="HTML code start is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></TD>
-						</TR>
-						<TR>
-							<TD style="WIDTH: 137px">HTML code end</TD>
-							<TD>
+									errormessage="HTML code start is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></td>
+						</tr>
+						<tr>
+							<td style="WIDTH: 137px">HTML code end</td>
+							<td>
 								<asp:textbox id="txtHtmlCodeEnd" runat="server" width="592px"></asp:textbox>
 								<asp:requiredfieldvalidator id="rfvHtmlCodeEnd" runat="server" controltovalidate="txtHtmlCodeEnd" enableclientscript="False"
-									errormessage="HTML code start is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></TD>
-						</TR>
+									errormessage="HTML code start is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></td>
+						</tr>
 					</table>
 				</div>
 				<p><asp:button id="btnSave" runat="server" text="Save"></asp:button><asp:button id="btnDelete" runat="server" text="Delete" visible="False"></asp:button><input id="btnCancel" type="button" value="Cancel" runat="server"></p>

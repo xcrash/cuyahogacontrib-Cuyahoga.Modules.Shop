@@ -14,7 +14,7 @@
                   <td class="shopcolumn">
                       <asp:Label ID="LabelFirstname" runat="server"></asp:Label></td>
                   <td  class="shopcolumn">
-                      <asp:Label ID="LabelFirstnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "Firstname")%></asp:Label></td>
+                      <asp:Label ID="LabelFirstnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "User.FirstName")%></asp:Label></td>
               </tr>
               <tr class="shoprow">
                   <td class="shopcolumn">
@@ -22,7 +22,7 @@
                   <td class="shopcolumn">
                       <asp:Label ID="LabelLastname" runat="server"></asp:Label></td>
                   <td  class="shopcolumn">
-                      <asp:Label ID="LabelLastnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "Lastname")%></asp:Label></td>
+                      <asp:Label ID="LabelLastnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "User.LastName")%></asp:Label></td>
               </tr>
               <tr class="shoprow">
                   <td class="shopcolumn">
@@ -116,7 +116,7 @@
                   <td class="shopcolumn">
                       <asp:Label ID="LabelFirstname" runat="server"></asp:Label></td>
                   <td  class="shopcolumn">
-                      <asp:Label ID="LabelFirstnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "Firstname")%></asp:Label></td>
+                      <asp:Label ID="LabelFirstnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "User.FirstName")%></asp:Label></td>
               </tr>
               <tr class="shoprowalt">
                   <td class="shopcolumn">
@@ -124,7 +124,7 @@
                   <td class="shopcolumn">
                       <asp:Label ID="LabelLastname" runat="server"></asp:Label></td>
                   <td  class="shopcolumn">
-                      <asp:Label ID="LabelLastnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "Lastname")%></asp:Label></td>
+                      <asp:Label ID="LabelLastnameValue" runat="server"><%# DataBinder.Eval(Container.DataItem, "User.LastName")%></asp:Label></td>
               </tr>
               <tr class="shoprowalt">
                   <td class="shopcolumn">
@@ -218,7 +218,7 @@
                   <td class="shopcolumn">
                       <asp:Label ID="LabelFirstname" runat="server"></asp:Label></td>
                   <td  class="shopcolumn">
-                      <asp:TextBox ID="TextBoxFirstnameValue" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Firstname")%>'/></td>
+                      <asp:Label ID="TextBoxFirstnameValue" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "User.FirstName")%>'/></td>
               </tr>
               <tr class="shoprow">
                   <td class="shopcolumn">
@@ -226,7 +226,7 @@
                   <td class="shopcolumn">
                       <asp:Label ID="LabelLastname" runat="server"></asp:Label></td>
                   <td  class="shopcolumn">
-                      <asp:TextBox ID="TextBoxLastnameValue" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Lastname")%>'/></td>
+                      <asp:Label ID="TextBoxLastnameValue" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "User.LastName")%>'/></td>
               </tr>
               <tr class="shoprow">
                   <td class="shopcolumn">
@@ -311,7 +311,8 @@
               </tr>
           </table>
     </EditItemTemplate>
-</asp:DataList><br />
+</asp:DataList>
+<br />
 &nbsp;<asp:Button ID="ButtonAddNewAddress" runat="server" OnClick="ButtonAddNewAddress_Click" /><br />
 <br />
 &nbsp;<asp:placeholder id="phShopFooter" runat="server"></asp:placeholder>

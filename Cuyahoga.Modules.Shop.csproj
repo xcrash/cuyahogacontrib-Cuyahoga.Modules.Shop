@@ -29,9 +29,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.DynamicProxy, Version=1.1.5.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Castle.DynamicProxy.dll</HintPath>
+      <HintPath>..\lib\Castle.DynamicProxy.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Facilities.AutomaticTransactionManagement, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <SpecificVersion>False</SpecificVersion>
@@ -39,43 +43,35 @@
     </Reference>
     <Reference Include="Castle.Facilities.NHibernateIntegration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Castle.Facilities.NHibernateIntegration.dll</HintPath>
+      <HintPath>..\lib\Castle.Facilities.NHibernateIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.0.2, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Castle.MicroKernel.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Model, Version=1.0.0.2, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Castle.Model.dll</HintPath>
+      <HintPath>..\lib\Castle.MicroKernel.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Services.Transaction, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Castle.Services.Transaction.dll</HintPath>
+      <HintPath>..\lib\Castle.Services.Transaction.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=1.0.0.2, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Castle.Windsor.dll</HintPath>
+      <HintPath>..\lib\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\log4net.dll</HintPath>
+      <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=1.0.2.0, Culture=neutral, PublicKeyToken=154fdcb44c4484fc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\NHibernate.dll</HintPath>
+      <HintPath>..\lib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Nullables, Version=1.0.2.0, Culture=neutral, PublicKeyToken=154fdcb44c4484fc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\bin\Nullables.dll</HintPath>
+      <HintPath>..\lib\Nullables.dll</HintPath>
     </Reference>
     <Reference Include="Nullables.NHibernate, Version=1.0.2.0, Culture=neutral, PublicKeyToken=154fdcb44c4484fc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Web\bin\Nullables.NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="paypal_base, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b37401294aaf5617">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\PayPal ASP.NET SDK\samples\AspNet\bin\paypal_base.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -124,12 +120,12 @@
       <DependentUpon>AdminShop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ShopPayment.ascx.cs">
-      <DependentUpon>ShopPayment.ascx</DependentUpon>
+    <Compile Include="Web\ShopCheckout.ascx.cs">
+      <DependentUpon>ShopCheckout.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ShopPayment.ascx.designer.cs">
-      <DependentUpon>ShopPayment.ascx</DependentUpon>
+    <Compile Include="Web\ShopCheckout.ascx.designer.cs">
+      <DependentUpon>ShopCheckout.ascx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopCaddy.ascx.cs">
       <DependentUpon>ShopCaddy.ascx</DependentUpon>
@@ -137,13 +133,6 @@
     </Compile>
     <Compile Include="Web\ShopCaddy.ascx.designer.cs">
       <DependentUpon>ShopCaddy.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Web\Imager.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Imager.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Web\Imager.aspx.designer.cs">
-      <DependentUpon>Imager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopCategoryList.ascx.cs">
       <DependentUpon>ShopCategoryList.ascx</DependentUpon>
@@ -157,27 +146,17 @@
       <DependentUpon>ShopList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ShopNewComment.ascx.cs">
-      <DependentUpon>ShopNewComment.ascx</DependentUpon>
+    <Compile Include="Web\ShopEditComment.ascx.cs">
+      <DependentUpon>ShopEditComment.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ShopNewProduct.ascx.cs">
-      <DependentUpon>ShopNewProduct.ascx</DependentUpon>
+    <Compile Include="Web\ShopEditProduct.ascx.cs">
+      <DependentUpon>ShopEditProduct.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web\ShopPayPal.ascx.cs">
-      <DependentUpon>ShopPayPal.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web\ShopPayPal.ascx.designer.cs">
-      <DependentUpon>ShopPayPal.ascx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopProfile.ascx.cs">
       <DependentUpon>ShopProfile.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web\ShopProfile.ascx.designer.cs">
-      <DependentUpon>ShopProfile.ascx</DependentUpon>
     </Compile>
     <Compile Include="Web\ShopSearch.ascx.cs">
       <DependentUpon>ShopSearch.ascx</DependentUpon>
@@ -197,6 +176,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ImageDatabase\ImageCtrl.csproj">
+      <Project>{E8AD0369-3AEA-453E-BFD8-AA18FE63A3EB}</Project>
+      <Name>ImageCtrl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Cuyahoga.Core.csproj">
       <Project>{723B7D30-6472-4B96-8D09-4F094C96650E}</Project>
       <Name>Cuyahoga.Core</Name>
@@ -233,18 +216,15 @@
     <Content Include="Web\AdminShop.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Web\ShopPayment.ascx" />
     <Content Include="Web\ShopCaddy.ascx" />
-    <Content Include="Web\Imager.aspx" />
     <Content Include="Web\shop.js" />
     <Content Include="Web\ShopCategoryList.ascx" />
     <Content Include="Web\ShopFooter.ascx" />
     <Content Include="Web\ShopList.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Web\ShopNewComment.ascx" />
-    <Content Include="Web\ShopNewProduct.ascx" />
-    <Content Include="Web\ShopPayPal.ascx" />
+    <Content Include="Web\ShopEditComment.ascx" />
+    <Content Include="Web\ShopEditProduct.ascx" />
     <Content Include="Web\ShopProfile.ascx" />
     <Content Include="Web\ShopSearch.ascx" />
     <Content Include="Web\ShopTop.ascx" />
@@ -280,6 +260,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="web.config" />
+    <Content Include="Web\ShopCheckout.ascx" />
     <None Include="Web\ClassDiagramShop.cd" />
   </ItemGroup>
   <ItemGroup>

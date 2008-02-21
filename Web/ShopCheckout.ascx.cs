@@ -16,7 +16,7 @@ using Cuyahoga.Modules.Shop.Domain;
 
 namespace Cuyahoga.Modules.Shop
 {
-    public partial class ShopCaddy : BaseModuleControl
+    public partial class ShopCheckout : BaseModuleControl
     {
         private ShopModule _module;
         
@@ -71,41 +71,8 @@ namespace Cuyahoga.Modules.Shop
                 hpl.CssClass = "shop";
             }
 
-            this.rptShopCaddyList.DataSource = this._module.CurrentShopOrder.OrderLines;
-            this.rptShopCaddyList.DataBind();
         }
 
-
-        public string GetTotal(object o)
-        {
-            //ShopCaddyItem item = o as ShopCaddyItem;
-            decimal dTotal = 0; //item.Product.Price * item.Quantity;
-            foreach (Object obj in this._module.CurrentShopOrder.OrderLines)
-            {
-                ShopOrderLine orderLine = obj as ShopOrderLine;
-                ShopProduct product = orderLine.Product;
-                dTotal += product.Price;
-            }
-            return String.Format("{0:c}", dTotal);
-        }
-
-        protected void rptShopCaddyList_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "Remove")
-            {
-                int orderLineId = int.Parse(((HiddenField)e.Item.FindControl("OrderLineId")).Value);
-                ShopOrderLine orderLine = this._module.GetShopOrderLine(orderLineId);
-                this._module.CurrentShopOrder.OrderLines.Remove(orderLine);
-                this._module.SaveOrder(this._module.CurrentShopOrder);
-                this._module.DeleteShopOrderLine(orderLine);
-                this.BindShopCaddy();
-            }
-        }
-
-        protected void ButtonCheckout_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(String.Format("{0}/ShopCheckout", UrlHelper.GetUrlFromSection(this._module.Section)));
-        }
 
         protected void ButtonContinueShopping_Click(object sender, EventArgs e)
         {

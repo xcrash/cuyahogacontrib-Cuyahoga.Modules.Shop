@@ -357,4 +357,16 @@
   <data name="yes" xml:space="preserve">
     <value>yes</value>
   </data>
+  <data name="ButtonCheckout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="ButtonContinueShopping" xml:space="preserve">
+    <value>Continue shopping</value>
+  </data>
+  <data name="ButtonEmail" xml:space="preserve">
+    <value>Email payment</value>
+  </data>
+  <data name="ButtonPaypal" xml:space="preserve">
+    <value>Paypal payment</value>
+  </data>
 </root>

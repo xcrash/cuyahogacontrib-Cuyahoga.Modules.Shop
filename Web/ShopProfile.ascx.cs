@@ -19,6 +19,10 @@ namespace Cuyahoga.Modules.Shop
     public partial class ShopProfile : BaseModuleControl
     {
         private ShopModule _module;
+        protected DataList DataListAddress;
+        protected PlaceHolder phShopFooter;
+        protected PlaceHolder phShopTop;
+        protected Button ButtonAddNewAddress;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,7 +57,7 @@ namespace Cuyahoga.Modules.Shop
         private void BindAddress()
 		{
 			Cuyahoga.Core.Domain.User user = Context.User.Identity as Cuyahoga.Core.Domain.User;
-
+            
             this.DataListAddress.DataSource = this._module.GetShopUserAddress(user);
             this.DataListAddress.DataBind();
 
@@ -127,8 +131,6 @@ namespace Cuyahoga.Modules.Shop
 
             ShopUserAddress address = this._module.GetShopUserAddress(int.Parse(id.Value));
 
-            address.Firstname = ((TextBox)e.Item.FindControl("TextBoxFirstnameValue")).Text;
-            address.Lastname = ((TextBox)e.Item.FindControl("TextBoxLastnameValue")).Text;
             address.Mobile = ((TextBox)e.Item.FindControl("TextBoxMobileValue")).Text;
             address.Region = ((TextBox)e.Item.FindControl("TextBoxRegionValue")).Text;
             address.Telephone1 = ((TextBox)e.Item.FindControl("TextBoxTelephone1Value")).Text;

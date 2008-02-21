@@ -18,6 +18,18 @@
 		<property name="Message" column="message" type="StringClob" />
 		<property name="Views" column="views" type="Int32" />
 		<property name="Comments" column="comments" type="Int32" />
-    <property name="Price" column="price" type="Decimal" />
+		<property name="Price" column="price" type="Decimal" />
+		<bag name="Images" cascade="all" lazy="true">
+			<key column="productid" />
+			<one-to-many class="Cuyahoga.Modules.Shop.Domain.ShopImage, Cuyahoga.Modules.Shop" />
+		</bag>
+		<bag name="CommentList" cascade="all" lazy="true">
+			<key column="productid" />
+			<one-to-many class="Cuyahoga.Modules.Shop.Domain.ShopComment, Cuyahoga.Modules.Shop" />
+		</bag>
+		<bag name="OrderLines" cascade="all" lazy="true">
+			<key column="productid" />
+			<one-to-many class="Cuyahoga.Modules.Shop.Domain.ShopOrderLine, Cuyahoga.Modules.Shop" />
+		</bag>		
   </class>
 </hibernate-mapping>

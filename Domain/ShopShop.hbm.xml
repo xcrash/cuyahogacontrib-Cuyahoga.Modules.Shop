@@ -15,8 +15,6 @@
 		<property name="LastPublished" column="lastpublished" type="DateTime" />
 		<property name="LastProductId" column="lastproductid" type="Int32" />
 		<property name="LastPublishUserName" column="lastpublishusername" type="String" length="50" />
-		<property name="NumProducts" column="numproducts" type="Int32" />
-		<property name="NumComments" column="numcomments" type="Int32" />
 		<property name="AllowGuestPublish" column="allowguestpublish" type="Int32" />
 	</class>
 </hibernate-mapping>

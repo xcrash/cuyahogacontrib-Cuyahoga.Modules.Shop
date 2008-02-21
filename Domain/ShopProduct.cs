@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Security.Principal;
+using NHibernate.Collection;
 
 namespace Cuyahoga.Modules.Shop.Domain
 {
@@ -16,6 +19,9 @@ namespace Cuyahoga.Modules.Shop.Domain
 		private int			_views;
 		private int			_comments;
         private decimal _price;
+        private IList _images;
+        private IList _commentlist;
+        private IList _orderLines;
 
 		#region Properties
 		public int Id
@@ -90,6 +96,22 @@ namespace Cuyahoga.Modules.Shop.Domain
             set { this._price = value; }
         }
 
+        public IList Images
+        {
+            get { return _images; }
+            set { _images = value; }
+        }
+
+        public IList CommentList
+        {
+            get { return _commentlist; }
+            set { _commentlist = value; }
+        }
+        public IList OrderLines
+        {
+            get { return _orderLines; }
+            set { _orderLines = value; }
+        }
 
 		#endregion
 
@@ -98,6 +120,9 @@ namespace Cuyahoga.Modules.Shop.Domain
 			this._id			= -1;
 			this._dateCreated	= DateTime.Now;
 			this._dateModified	= DateTime.Now;
-		}
+            this._images = new ArrayList();
+            this._commentlist = new ArrayList();
+            this._orderLines = new ArrayList();
+        }
 	}
 }

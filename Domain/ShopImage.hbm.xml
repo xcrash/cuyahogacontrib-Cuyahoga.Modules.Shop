@@ -14,5 +14,7 @@
 		<property name="ImageSize" column="imagesize" type="Int32" />
     <property name="ProductId" column="productid" type="Int32" />
     <property name="ContentType" column="contenttype" type="String" length="50" />
+		<property name="Data" column="data" type="BinaryBlob"/>
+		<property name="IsDefault" column="isdefault" type="Int32" />
 	</class>
 </hibernate-mapping>

@@ -129,5 +129,13 @@ namespace Cuyahoga.Modules.Shop
 			string strReturn = String.Format("<a href=\"{0}/ShopView/{1}\" class=\"shop\">{2}</a>",UrlHelper.GetUrlFromSection(this._module.Section), shop.Id,shop.Name);
 			return strReturn;
 		}
+
+        public string GetShopProductCount(object o)
+		{
+			ShopShop shop = o as ShopShop;
+			string strReturn = this._module.GetProductCount(shop)[0].ToString();
+			return strReturn;
+		}
+        
 	}
 }

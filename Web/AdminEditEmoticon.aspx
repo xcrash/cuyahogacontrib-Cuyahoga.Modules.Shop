@@ -21,13 +21,13 @@
 							<td><asp:textbox id="txtTextVersion" runat="server" width="592px"></asp:textbox><asp:requiredfieldvalidator id="rfvTextVersion" runat="server" cssclass="validator" display="Dynamic" errormessage="Text version is required"
 									enableclientscript="False" controltovalidate="txtTextVersion"></asp:requiredfieldvalidator></td>
 						</tr>
-						<TR>
-							<TD style="WIDTH: 100px">Image name</TD>
-							<TD>
+						<tr>
+							<td style="WIDTH: 100px">Image name</td>
+							<td>
 								<asp:textbox id="txtImageName" runat="server" width="592px"></asp:textbox>
 								<asp:requiredfieldvalidator id="rfvImageName" runat="server" controltovalidate="txtImageName" enableclientscript="False"
-									errormessage="Image name is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></TD>
-						</TR>
+									errormessage="Image name is required" display="Dynamic" cssclass="validator"></asp:requiredfieldvalidator></td>
+						</tr>
 					</table>
 				</div>
 				<p><asp:button id="btnSave" runat="server" text="Save"></asp:button><asp:button id="btnDelete" runat="server" text="Delete" visible="False"></asp:button><input id="btnCancel" type="button" value="Cancel" runat="server"></p>

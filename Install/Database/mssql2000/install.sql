@@ -259,6 +259,11 @@ INSERT INTO cuyahoga_version (assembly, major, minor, patch) VALUES ('Cuyahoga.M
 go
 INSERT INTO cuyahoga_modulesetting (moduletypeid, name, friendlyname, settingdatatype, iscustomtype, isrequired) VALUES (@moduletypeid, 'ALLOW_COMMENTS', 'Allow comments', 'System.Boolean', 0, 1)
 go
+INSERT INTO cuyahoga_modulesetting (moduletypeid, name, friendlyname, settingdatatype, iscustomtype, isrequired) VALUES (@moduletypeid, 'IMAGE_WIDTH', 'Image width', 'System.Int32', 0, 1)
+go
+INSERT INTO cuyahoga_modulesetting (moduletypeid, name, friendlyname, settingdatatype, iscustomtype, isrequired) VALUES (@moduletypeid, 'THUMB_WIDTH', 'Thumb width', 'System.Int32', 0, 1)
+go
+
 INSERT INTO cm_shopemoticon (textversion, imagename,  inserttimestamp, updatetimestamp) VALUES ('8)', 'cool.gif', '2005-02-11 14:36:28.324', '2004-02-11 14:36:28.324')
 go
 INSERT INTO cm_shopemoticon (textversion, imagename,  inserttimestamp, updatetimestamp) VALUES (':(', 'angry.gif', '2005-02-11 14:36:28.324', '2004-02-11 14:36:28.324')

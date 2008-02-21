@@ -47,21 +47,34 @@ namespace Cuyahoga.Modules.Shop
 		private int				_currentShopId;
 		private int				_currentShopCategoryId;
 		private int				_currentShopProductId;
-		private int				_currentUserId;
+        private int _currentShopCommentId;
+        private int _currentUserId;
 		private int				_quoteProduct;
-		private int				_origShopProductId;
-		private int				_downloadId;
+        private int _thumbwidth;
+        private int _imagewidth;
 
 		private string			_shopthemepath;
         private ISessionManager _sessionManager;
 		
 		#region Properties
         
-        public int CurrentUserId
+        public int ThumbWidth
 		{
-			get { return this._currentUserId; }
-			set { this._currentUserId = value; }
+            get { return this._thumbwidth; }
+            set { this._thumbwidth = value; }
 		}
+
+        public int ImageWidth
+        {
+            get { return this._imagewidth; }
+            set { this._imagewidth = value; }
+        }
+
+        public int CurrentUserId
+        {
+            get { return this._currentUserId; }
+            set { this._currentUserId = value; }
+        }
 
 		public int CurrentShopId
 		{
@@ -81,6 +94,12 @@ namespace Cuyahoga.Modules.Shop
 			set { this._currentShopProductId = value; }
 		}
 
+        public int CurrentShopCommentId
+        {
+            get { return this._currentShopCommentId; }
+            set { this._currentShopCommentId = value; }
+        }
+
 		public int QuoteProduct
 		{
 			get { return this._quoteProduct; }
@@ -91,12 +110,6 @@ namespace Cuyahoga.Modules.Shop
 		{
 			get { return this._shopthemepath; }
 			set { this._shopthemepath = value; }
-		}
-
-		public int OrigShopProductId
-		{
-			get { return this._origShopProductId; }
-			set { this._origShopProductId = value; }
 		}
 
 		public ShopOrder CurrentShopOrder
@@ -110,6 +123,8 @@ namespace Cuyahoga.Modules.Shop
 			get { return this._currentAction; }
 		}
 		#endregion
+
+        #region module
 
         public ShopModule(ISessionManager sessionManager)
 		{
@@ -127,7 +142,26 @@ namespace Cuyahoga.Modules.Shop
             _productSortASC = true;
 
 			this._shopthemepath = UrlHelper.GetApplicationPath() + "Modules/Shop/Images/Standard/";
+
+            this.ReadSectionSettings();
 		}
+
+        public override void ReadSectionSettings()
+        {
+            //base.ReadSectionSettings();
+
+            try
+            {
+                this._imagewidth = Convert.ToInt32(base.Section.Settings["IMAGE_WIDTH"]);
+                this._thumbwidth = Convert.ToInt32(base.Section.Settings["THUMB_WIDTH"]);
+            }
+            catch
+            {
+                // Only if the module settings are not in the database yet for some reason.
+                this._imagewidth = 200;
+                this._thumbwidth = 60;
+            }
+        }
 
 		/// <summary>
 		/// Override ParsePathInfo to determine action and optional parameters.
@@ -152,8 +186,9 @@ namespace Cuyahoga.Modules.Shop
 							this.CurrentShopId = Int32.Parse(base.ModuleParams[1]);
 							break;
 
-						case ShopModuleAction.ShopNewProduct:
-							this.CurrentShopId = Int32.Parse(base.ModuleParams[1]);
+						case ShopModuleAction.ShopEditProduct:
+                            this.CurrentShopId = Int32.Parse(base.ModuleParams[1]);
+                            this.CurrentShopProductId = Int32.Parse(base.ModuleParams[3]);
 							break;
 
 						case ShopModuleAction.ShopViewProduct:
@@ -162,19 +197,18 @@ namespace Cuyahoga.Modules.Shop
 							
 							break;
 
-						case ShopModuleAction.ShopNewComment:
+						case ShopModuleAction.ShopEditComment:
 							this.CurrentShopId		= Int32.Parse(base.ModuleParams[1]);
 							this.CurrentShopProductId	= Int32.Parse(base.ModuleParams[3]);
-							this.OrigShopProductId	= Int32.Parse(base.ModuleParams[3]);
 							this.QuoteProduct = 0;
-							break;
-
-						case ShopModuleAction.ShopNewCommentQuote:
-							this.CurrentShopId		= Int32.Parse(base.ModuleParams[1]);
-							this.CurrentShopProductId	= Int32.Parse(base.ModuleParams[3]);
-							this.OrigShopProductId	= Int32.Parse(base.ModuleParams[5]);
-							this.QuoteProduct = 1;
-							this._currentAction = ShopModuleAction.ShopNewComment;
+                            if (base.ModuleParams[5] == "")
+                            {
+                                this.CurrentShopCommentId = -1;
+                            }
+                            else
+                            {
+                                this.CurrentShopCommentId = Int32.Parse(base.ModuleParams[5]);
+                            }
 							break;
 
 						case ShopModuleAction.ShopProfile:
@@ -194,16 +228,6 @@ namespace Cuyahoga.Modules.Shop
 			}
 		}
 
-        public override void DeleteModuleContent()
-		{
-			// Delete all the files that users have uploaded
-			
-			string sUpDir = HttpContext.Current.Request.PhysicalApplicationPath + "Modules/Shop/Attach/";
-			if(System.IO.Directory.Exists(sUpDir))
-			{
-				System.IO.Directory.Delete(sUpDir,true);
-			}
-		}
 
 		/// <summary>
 		/// The current view user control based on the action that was set while parsing the pathinfo.
@@ -215,10 +239,12 @@ namespace Cuyahoga.Modules.Shop
 				string basePath = "Modules/Shop/";
 				return basePath + this._currentAction.ToString() + ".ascx";
 			}
-		}
+        }
 
-		#region Shop
-		/// <summary>
+        #endregion
+
+        #region Shop
+        /// <summary>
 		/// 
 		/// </summary>
 		/// <param name="number"></param>
@@ -320,6 +346,32 @@ namespace Cuyahoga.Modules.Shop
 			}
 		}
 
+
+        /// <summary>
+        /// Get the number of products.
+        /// </summary>
+        /// <returns></returns>
+        public IList GetProductCount(ShopShop shop)
+        {
+            ISession session = this._sessionManager.OpenSession();
+            try
+            {
+                string hql;
+                hql = "select count(prod.Id) from ShopProduct prod Where prod.ShopId = :shopid";
+                IQuery q = session.CreateQuery(hql);
+                q.SetString("shopid", shop.Id.ToString());
+
+                IList prodlist = q.List();
+       
+
+                return prodlist;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get number of products", ex);
+            }
+        }
+
 		/// <summary>
 		/// The property to sort the links by.
 		/// </summary>
@@ -391,16 +443,12 @@ namespace Cuyahoga.Modules.Shop
         public virtual void SaveShopCategory(ShopCategory shopcategory)
 		{
             ISession session = this._sessionManager.OpenSession();
-            NHibernate.ITransaction tx = session.BeginTransaction();
             try
             {
                 session.SaveOrUpdate(shopcategory);
-                tx.Commit();
-                session.Close();
 			}
 			catch (Exception ex)
 			{
-                tx.Rollback();
                 throw new Exception("Unable to save Shop category" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
 			}
 		}
@@ -412,16 +460,12 @@ namespace Cuyahoga.Modules.Shop
         public virtual void DeleteShopCategory(ShopCategory shopcategory)
 		{
             ISession session = this._sessionManager.OpenSession();
-            NHibernate.ITransaction tx = session.BeginTransaction();
             try
             {
                 session.Delete(shopcategory);
-                tx.Commit();
-                session.Close();
 			}
 			catch (Exception ex)
 			{
-                tx.Rollback();
                 throw new Exception("Unable to delete Shop category" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
 			}
 		}
@@ -491,6 +535,30 @@ namespace Cuyahoga.Modules.Shop
 			}
 		}
 
+        /// <summary>
+        /// Get the number of comments.
+        /// </summary>
+        /// <returns></returns>
+        public IList GetCommentCount(ShopProduct product)
+        {
+            ISession session = this._sessionManager.OpenSession();
+            try
+            {
+                string hql;
+                hql = "select count(comment.Id) from ShopComment comment Where comment.ProductId = :productid";
+                IQuery q = session.CreateQuery(hql);
+                q.SetString("productid", product.Id.ToString());
+
+                IList commentlist = q.List();
+
+
+                return commentlist;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get number of comments", ex);
+            }
+        }
 
         [Transaction(TransactionMode.RequiresNew)]
         public virtual void SaveShopComment(ShopComment shopcomment)
@@ -507,6 +575,43 @@ namespace Cuyahoga.Modules.Shop
             {
                 tx.Rollback();
                 throw new Exception("Unable to save Shop comment" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
+            }
+        }
+
+        [Transaction(TransactionMode.RequiresNew)]
+        public virtual void DeleteShopComment(ShopComment comment)
+        {
+            ISession session = this._sessionManager.OpenSession();
+            NHibernate.ITransaction tx = session.BeginTransaction();
+            try
+            {
+                session.Delete(comment);
+                tx.Commit();
+                session.Close();
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                throw new Exception("Unable to delete Shop comment" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
+            }
+        }
+
+
+        /// <summary>
+        /// Get the meta-information of a comment.
+        /// </summary>
+        /// <param name="fileId"></param>
+        /// <returns></returns>
+        public ShopComment GetShopCommentById(int id)
+        {
+            ISession session = this._sessionManager.OpenSession();
+            try
+            {
+                return (ShopComment)session.Load(typeof(ShopComment), id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get Shop comment identifier: " + id.ToString(), ex);
             }
         }
 
@@ -556,10 +661,18 @@ namespace Cuyahoga.Modules.Shop
             NHibernate.ITransaction tx = session.BeginTransaction();
             try
             {
+                foreach (Object obj in product.Images)
+                {
+                    session.Delete((ShopImage)obj);
+                }
+                foreach (Object obj in product.CommentList)
+                {
+                    session.Delete((ShopComment)obj);
+                }
                 session.Delete(product);
                 tx.Commit();
                 session.Close();
-			}
+            }
 			catch (Exception ex)
 			{
                 tx.Rollback();
@@ -913,6 +1026,23 @@ namespace Cuyahoga.Modules.Shop
             }
         }
 
+        [Transaction(TransactionMode.RequiresNew)]
+        public virtual void DeleteShopOrderLine(ShopOrderLine orderLine)
+        {
+            ISession session = this._sessionManager.OpenSession();
+            NHibernate.ITransaction tx = session.BeginTransaction();
+            try
+            {
+                session.Delete(orderLine);
+                tx.Commit();
+                session.Close();
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                throw new Exception("Unable to delete Shop order line" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
+            }
+        }
 
         #endregion
 
@@ -993,7 +1123,23 @@ namespace Cuyahoga.Modules.Shop
             }
         }
 
-
+        [Transaction(TransactionMode.RequiresNew)]
+        public virtual void DeleteShopImage(ShopImage shopImage)
+		{
+            ISession session = this._sessionManager.OpenSession();
+            NHibernate.ITransaction tx = session.BeginTransaction();
+            try
+            {
+                session.Delete(shopImage);
+                tx.Commit();
+                session.Close();
+			}
+			catch (Exception ex)
+			{
+                tx.Rollback();
+                throw new Exception("Unable to delete Shop image" + "<br>" + ex.Message + "<br>" + ex.InnerException, ex);
+			}
+		}
 
 		#endregion
 
@@ -1027,14 +1173,14 @@ namespace Cuyahoga.Modules.Shop
 		/// <summary>
 		/// 
 		/// </summary>
-		ShopNewProduct,
+		ShopEditProduct,
 		ShopViewProduct,
-		ShopNewComment,
-		ShopNewCommentQuote,
+		ShopEditComment,
 		ShopSearch,
 		ShopProfile,
 		ShopViewProfile,
-        ShopCaddy
+        ShopCaddy,
+        ShopCheckout
 	}
 
     /// <summary>

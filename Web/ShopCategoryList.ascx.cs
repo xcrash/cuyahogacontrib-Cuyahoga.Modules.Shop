@@ -108,5 +108,12 @@ namespace Cuyahoga.Modules.Shop
                 labelCategory.Text = this._module.GetShopCategoryById(this._module.CurrentShopCategoryId).Name;
             }
 		}
+
+        public string GetShopProductCount(object o)
+        {
+            ShopShop shop = o as ShopShop;
+            string strReturn = this._module.GetProductCount(shop)[0].ToString();
+            return strReturn;
+        }
 	}
 }

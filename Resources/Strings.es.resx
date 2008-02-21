@@ -124,10 +124,10 @@
     <value>Invitado</value>
   </data>
   <data name="FORUMGOHOME" xml:space="preserve">
-    <value>Volvar al listado de foros</value>
+    <value>Volver a la lista de negocios</value>
   </data>
   <data name="lblShop" xml:space="preserve">
-    <value>Foro</value>
+    <value>Negocio</value>
   </data>
   <data name="lblUserName" xml:space="preserve">
     <value>Usuario</value>
@@ -139,16 +139,16 @@
     <value>Buscar</value>
   </data>
   <data name="lblLocation" xml:space="preserve">
-    <value>Ubicación geográfica</value>
+    <value>Ubicación</value>
   </data>
   <data name="lblInterest" xml:space="preserve">
-    <value>Interéses</value>
+    <value>Interes</value>
   </data>
   <data name="lblGender" xml:space="preserve">
     <value>Sexo</value>
   </data>
   <data name="lblHomePage" xml:space="preserve">
-    <value>Sitio internet</value>
+    <value>Página inicial</value>
   </data>
   <data name="lblMSN" xml:space="preserve">
     <value>MSN</value>
@@ -157,10 +157,10 @@
     <value>Yahoo messenger</value>
   </data>
   <data name="lblAIMName" xml:space="preserve">
-    <value>Nombre AIM</value>
+    <value>Mensajeria</value>
   </data>
   <data name="lblICQNumber" xml:space="preserve">
-    <value>Número ICQ</value>
+    <value>número ICQ</value>
   </data>
   <data name="lblTimeZone" xml:space="preserve">
     <value>Huso horario</value>
@@ -175,13 +175,13 @@
     <value>Ocupación</value>
   </data>
   <data name="posts" xml:space="preserve">
-    <value>Publicaciones</value>
+    <value>Productos</value>
   </data>
   <data name="postedby" xml:space="preserve">
     <value>Publicado por</value>
   </data>
   <data name="allshops" xml:space="preserve">
-    <value>Todos los foros</value>
+    <value>Todos los negocios</value>
   </data>
   <data name="btnSearch" xml:space="preserve">
     <value>Buscar</value>
@@ -193,10 +193,10 @@
     <value>Masculino</value>
   </data>
   <data name="female" xml:space="preserve">
-    <value>Femenino</value>
+    <value>Mujer</value>
   </data>
   <data name="fileerror" xml:space="preserve">
-    <value>'{0}' no es un archivo válido.</value>
+    <value>'{0}' no es un archivo correcto.</value>
   </data>
   <data name="lblAttachment" xml:space="preserve">
     <value>Archivo adjunto</value>
@@ -208,31 +208,31 @@
     <value>Cancelar</value>
   </data>
   <data name="btnProduct" xml:space="preserve">
-    <value>Publicar</value>
+    <value>Producto</value>
   </data>
   <data name="btnPreview" xml:space="preserve">
-    <value>Previsualizar</value>
+    <value>Previsualización</value>
   </data>
   <data name="btnSave" xml:space="preserve">
     <value>Guardar</value>
   </data>
   <data name="FORUMHOME" xml:space="preserve">
-    <value>Foro raiz</value>
+    <value>Inicio</value>
   </data>
   <data name="hplShopCategory" xml:space="preserve">
     <value>Categoría</value>
   </data>
   <data name="hplShopProfile" xml:space="preserve">
-    <value>Mis datos</value>
+    <value>Mi perfil</value>
   </data>
   <data name="hplNewTitle" xml:space="preserve">
-    <value>Nuevo tema</value>
+    <value>Nuevo producto</value>
   </data>
   <data name="hplQuoteProduct" xml:space="preserve">
     <value>Citar</value>
   </data>
   <data name="hplReply" xml:space="preserve">
-    <value>Responder</value>
+    <value>Agregar comentario</value>
   </data>
   <data name="hplSearch" xml:space="preserve">
     <value>Buscar</value>
@@ -241,25 +241,25 @@
     <value>Ultima publicación</value>
   </data>
   <data name="lblHdrNumProducts" xml:space="preserve">
-    <value>N° pubs.</value>
+    <value>Número de comentarios</value>
   </data>
   <data name="lblHdrComments" xml:space="preserve">
-    <value>Respuestas</value>
+    <value>Comentarios</value>
   </data>
   <data name="lblHdrProducts" xml:space="preserve">
-    <value>Temas</value>
+    <value>Productos</value>
   </data>
   <data name="lblHdrTitleStarter" xml:space="preserve">
-    <value>Creador</value>
+    <value>Autor</value>
   </data>
   <data name="lblHdrTitleTitle" xml:space="preserve">
-    <value>Temas</value>
+    <value>Productos</value>
   </data>
   <data name="lblHdrViews" xml:space="preserve">
-    <value>Lecturas</value>
+    <value>Vistas</value>
   </data>
   <data name="lblNewTitle" xml:space="preserve">
-    <value>Nuevo Tema</value>
+    <value>Nuevo producto</value>
   </data>
   <data name="lblOrigTitle" xml:space="preserve">
     <value>Mensaje original</value>
@@ -268,7 +268,7 @@
     <value>Fecha de publicación</value>
   </data>
   <data name="lblPreview" xml:space="preserve">
-    <value>Previsualización</value>
+    <value>Previsualizar</value>
   </data>
   <data name="lblReplyAttachment" xml:space="preserve">
     <value>Archivo adjunto</value>
@@ -283,10 +283,10 @@
     <value>Mensaje</value>
   </data>
   <data name="ltProfile" xml:space="preserve">
-    <value>Datos personales</value>
+    <value>Perfil</value>
   </data>
   <data name="ltTitle" xml:space="preserve">
-    <value>Tema</value>
+    <value>Título</value>
   </data>
   <data name="rbFemale" xml:space="preserve">
     <value>Mujer</value>
@@ -295,9 +295,78 @@
     <value>Hombre</value>
   </data>
   <data name="rfvMessage" xml:space="preserve">
-    <value>El campo mensaje es obligatorio</value>
+    <value>El mensaje es necesario</value>
   </data>
   <data name="rfvSubject" xml:space="preserve">
-    <value>El campo tema es obligatorio</value>
+    <value>El titulo es necesario</value>
+  </data>
+  <data name="ButtonAddNewAddress" xml:space="preserve">
+    <value>Agregar nueva dirección</value>
+  </data>
+  <data name="LabelAddress1" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="LabelAddress2" xml:space="preserve">
+    <value>Dirección 2</value>
+  </data>
+  <data name="LabelCity" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="LabelCountry" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="LabelDelivery" xml:space="preserve">
+    <value>Es dirección de entrega</value>
+  </data>
+  <data name="LabelFirstname" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="LabelLastname" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="LabelMobile" xml:space="preserve">
+    <value>Celular</value>
+  </data>
+  <data name="LabelRegion" xml:space="preserve">
+    <value>Región</value>
+  </data>
+  <data name="LabelTelephone1" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="LabelTelephone2" xml:space="preserve">
+    <value>Teléfono 2</value>
+  </data>
+  <data name="LabelZip" xml:space="preserve">
+    <value>C.P.</value>
+  </data>
+  <data name="LinkButtonCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="LinkButtonDelete" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="LinkButtonEdit" xml:space="preserve">
+    <value>Modificar</value>
+  </data>
+  <data name="LinkButtonSave" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>si</value>
+  </data>
+  <data name="ButtonCheckout" xml:space="preserve">
+    <value>Pagar</value>
+  </data>
+  <data name="ButtonContinueShopping" xml:space="preserve">
+    <value>Continuar comprando</value>
+  </data>
+  <data name="ButtonEmail" xml:space="preserve">
+    <value>Pagar por email</value>
+  </data>
+  <data name="ButtonPaypal" xml:space="preserve">
+    <value>Pagar por Paypal</value>
   </data>
 </root>

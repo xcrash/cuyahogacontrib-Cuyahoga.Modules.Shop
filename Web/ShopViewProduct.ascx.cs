@@ -1,7 +1,13 @@
 using System;
 using System.Collections;
 using System.Web.UI.WebControls;
-using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.Web;
+using System.Web.SessionState;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 
 using Cuyahoga.Core.Util;
 using Cuyahoga.Web.UI;
@@ -9,6 +15,7 @@ using Cuyahoga.Web.Util;
 using Cuyahoga.Modules.Shop;
 using Cuyahoga.Modules.Shop.Domain;
 using Cuyahoga.Modules.Shop.Utils;
+using PAB.WebControls;
 
 namespace Cuyahoga.Modules.Shop
 {
@@ -32,7 +39,7 @@ namespace Cuyahoga.Modules.Shop
 		protected System.Web.UI.WebControls.Label Label2;
 		protected System.Web.UI.WebControls.HyperLink hplReply;
         protected System.Web.UI.WebControls.LinkButton lbtnBuy;
-        protected System.Web.UI.WebControls.HyperLink hplNewTitle;
+        protected System.Web.UI.WebControls.HyperLink HyperLinkEdit;
 		protected System.Web.UI.WebControls.PlaceHolder phShopTop;
 		protected System.Web.UI.WebControls.PlaceHolder phShopFooter;
 		protected System.Web.UI.WebControls.Label lblTitle;
@@ -65,13 +72,13 @@ namespace Cuyahoga.Modules.Shop
 			this.BindTopFooter();
 			if(this._shopShop.AllowGuestPublish == 1 || this.Page.User.Identity.IsAuthenticated)
 			{
-				this.hplNewTitle.Visible = true;
+                this.HyperLinkEdit.Visible = true;
 				this.hplReply.Visible = true;
                 this.lbtnBuy.Visible = true;
             }
 			else
 			{
-				this.hplNewTitle.Visible = false;
+                this.HyperLinkEdit.Visible = false;
 				this.hplReply.Visible = false;
                 this.lbtnBuy.Visible = false;
             }
@@ -118,9 +125,9 @@ namespace Cuyahoga.Modules.Shop
 
 		private void BindLinks()
 		{
-			this.hplReply.NavigateUrl = String.Format("{0}/ShopNewComment/{1}/post/{2}",UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId,this._module.CurrentShopProductId);
-			this.hplNewTitle.NavigateUrl = String.Format("{0}/ShopNewProduct/{1}",UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId);
-		}
+			this.hplReply.NavigateUrl = String.Format("{0}/ShopEditComment/{1}/post/{2}/comment/-1",UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId,this._module.CurrentShopProductId);
+            this.HyperLinkEdit.NavigateUrl = String.Format("{0}/ShopEditProduct/{1}/product/{2}", UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId, this._module.CurrentShopProductId);
+        }
 
 		private void BindShopProduct()
 		{
@@ -143,6 +150,8 @@ namespace Cuyahoga.Modules.Shop
 				this.lblUserInfo.Text		= "&nbsp;";
 			}
 			string msg				= this._shopProduct.Message;
+
+
 			this.lblMessages.Text	= this._shopProduct.Message;
             this.lblPrice.Text = String.Format("{0:c}",this._shopProduct.Price);
 			this.lblPublishedDate.Text = TimeZoneUtil.AdjustDateToUserTimeZone(this._shopProduct.DateCreated, this.Page.User.Identity).ToLongDateString() + " " +TimeZoneUtil.AdjustDateToUserTimeZone(this._shopProduct.DateCreated, this.Page.User.Identity).ToLongTimeString();            
@@ -159,16 +168,6 @@ namespace Cuyahoga.Modules.Shop
 
 		private void BindShopProductComments()
 		{
-			// Bind the link
-			HyperLink hpl = (HyperLink)this.FindControl("hplNewTitle");
-			if(hpl != null)
-			{
-				hpl.Text = "New product";
-				hpl.NavigateUrl	= String.Format("{0}/ShopNewProduct/{1}",UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId);
-				hpl.CssClass	= "shop";
-			}
-
-			//this.rptShopProductCommentsList.ItemDataBound += new System.Web.UI.WebControls.RepeaterItemEventHandler(this.rptShopProductCommentsList_ItemDataBound);
             this.rptShopProductCommentsList.DataSource = this._module.GetAllShopProductComments(this._module.CurrentShopProductId);
             this.rptShopProductCommentsList.DataBind();
 		}
@@ -194,20 +193,6 @@ namespace Cuyahoga.Modules.Shop
 		}
 		#endregion
 
-
-        private void rptShopProductImagesList_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                ShopProduct fProduct = e.Item.DataItem as ShopProduct;
-            }
-        }
-
-
-		private void rptShopProductCommentsList_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
-		{
-		
-		}
 
 		public string GetPublishedDate(object o)
 		{
@@ -238,19 +223,6 @@ namespace Cuyahoga.Modules.Shop
             return tComment.Rating.ToString();
         }
 
-        public string GetImageURL(object o)
-		{
-			ShopImage tImage = o as ShopImage;
-
-            string sUpDir = "Modules//Shop//Attach//";
-            string filename = tImage.OrigImageName;
-            string sImageOutputWidth = "200";
-
-            string sReturn = UrlHelper.GetSiteUrl() + "/Modules/Shop/Imager.aspx?Image=" + String.Format("{0}{1}.{2}.{3}&ImageOutputWidth={4}", sUpDir, this._shopProduct.ShopId, this._shopProduct.Id, filename, sImageOutputWidth);
-
-            return sReturn;
-		}
-
         protected void lbtnBuy_Click(object sender, EventArgs e)
         {
             
@@ -269,6 +241,46 @@ namespace Cuyahoga.Modules.Shop
             orderline.ShopOrder = this._module.CurrentShopOrder;
             this._module.CurrentShopOrder.OrderLines.Add(orderline);
             this._module.SaveOrder(this._module.CurrentShopOrder);
+        }
+
+        protected void rptShopProductImagesList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.AlternatingItem ||
+                   e.Item.ItemType == ListItemType.Item)
+            {
+                ShopImage image = (ShopImage)e.Item.DataItem;            
+
+                if (image.Data != null)
+                {
+                    ImageControl imgControl = (ImageControl)e.Item.FindControl("imgProduct");
+
+                    imgControl.Bitmap = Utils.Utils.ImageResize(image.Data, this._module.ImageWidth);
+                }
+            }
+        }
+
+        protected void rptShopProductCommentsList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete")
+            {
+                HiddenField HiddenFieldId = (HiddenField)e.Item.FindControl("HiddenFieldId");
+                ShopComment comment = this._module.GetShopCommentById(Int32.Parse(HiddenFieldId.Value));
+                if (comment != null)
+                {
+                    this._module.DeleteShopComment(comment);
+                    this.BindShopProductComments();
+                }
+            }
+        }
+
+        protected void rptShopProductCommentsList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                HyperLink HyperLinkEdit = (HyperLink)e.Item.FindControl("HyperLinkEdit");
+                HyperLinkEdit.NavigateUrl = String.Format("{0}/ShopEditComment/{1}/post/{2}/comment/{3}", UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId, this._module.CurrentShopProductId, ((ShopComment)e.Item.DataItem).Id);
+            }
+
         }	
 	}
 }

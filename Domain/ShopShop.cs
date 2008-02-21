@@ -15,8 +15,6 @@ namespace Cuyahoga.Modules.Shop.Domain
 		private string		_description;
         private DateTime    _lastpublished;
 		private int			_lastproductid;
-		private int			_numproducts;
-		private int			_numcomments;
 		private int			_sortorder;
 		private int			_allowguestpublish;
 		private string		_lastpublishusername;
@@ -77,18 +75,6 @@ namespace Cuyahoga.Modules.Shop.Domain
 		{
 			get { return this._lastproductid; }
             set { this._lastproductid = value; }
-		}
-
-        public int NumProducts
-		{
-			get { return this._numproducts; }
-			set { this._numproducts = value; }
-		}
-
-        public int NumComments
-		{
-			get { return this._numcomments; }
-			set { this._numcomments = value; }
 		}
 
         public int AllowGuestPublish

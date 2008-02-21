@@ -19,8 +19,6 @@ namespace Cuyahoga.Modules.Shop.Domain
         private string _telephone1;
         private string _telephone2;
         private string _mobile;
-        private string _firstname;
-        private string _lastname;
         private int _delivery;
         private User _user;
 
@@ -88,18 +86,6 @@ namespace Cuyahoga.Modules.Shop.Domain
         {
             get { return this._delivery; }
             set { this._delivery = value; }
-        }
-        
-        public string Firstname
-        {
-            get { return this._firstname; }
-            set { this._firstname = value; }
-        }
-        
-        public string Lastname
-        {
-            get { return this._lastname; }
-            set { this._lastname = value; }
         }
 
         public User User

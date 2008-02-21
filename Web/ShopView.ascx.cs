@@ -1,6 +1,11 @@
 using System;
 using System.Collections;
 using System.Web.UI.WebControls;
+using System.ComponentModel;
+using System.Web;
+using System.Web.SessionState;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 
 using Cuyahoga.Core.Util;
 using Cuyahoga.Web.UI;
@@ -8,6 +13,12 @@ using Cuyahoga.Web.Util;
 using Cuyahoga.Modules.Shop;
 using Cuyahoga.Modules.Shop.Domain;
 using Cuyahoga.Modules.Shop.Utils;
+using PAB.WebControls;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.IO;
+
 
 namespace Cuyahoga.Modules.Shop
 {
@@ -86,7 +97,7 @@ namespace Cuyahoga.Modules.Shop
 			if(hpl != null)
 			{
 				hpl.Text = base.GetText("lblNewTitle");
-				hpl.NavigateUrl	= String.Format("{0}/ShopNewProduct/{1}",UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId);
+				hpl.NavigateUrl	= String.Format("{0}/ShopEditProduct/{1}",UrlHelper.GetUrlFromSection(this._module.Section), this._module.CurrentShopId);
 				hpl.CssClass = "shop";
 			}
 			this.rptShopProductList.DataSource	= this._module.GetAllShopProducts(this._module.CurrentShopId);
@@ -120,21 +131,30 @@ namespace Cuyahoga.Modules.Shop
 			return String.Format("<a href=\"{0}/ShopViewProduct/{1}/ProductId/{2}\" class=\"shop\">{3}</a>",UrlHelper.GetUrlFromSection(this._module.Section), product.ShopId,product.Id,product.Title);
 		}
 
-        public string GetImageURL(object o)
+        protected void rptShopProductList_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            ShopProduct tShopProduct = o as ShopProduct;
+            if (e.Item.ItemType == ListItemType.AlternatingItem ||
+                   e.Item.ItemType == ListItemType.Item)
+            {
+                IList imageList = this._module.GetAllShopProductImages((int)DataBinder.Eval(e.Item.DataItem, "Id"));
+                
+                ShopImage image = (ShopImage)imageList[0];
 
-            IList imageList = this._module.GetAllShopProductImages(tShopProduct.Id);
+                if (image.Data != null)
+                {
+                    ImageControl imgControl = (ImageControl)e.Item.FindControl("imgProduct");
 
-            //TODO: Add image output width configuration to module
-        
-            string sUpDir = "Modules//Shop//Attach//";
-            string filename = ((ShopImage)imageList[0]).OrigImageName;
-            string sImageOutputWidth = "60";
+                    imgControl.Bitmap = Utils.Utils.ImageResize(image.Data, this._module.ThumbWidth);
+                }
+            }
 
-            string sReturn = UrlHelper.GetSiteUrl() + "/Modules/Shop/Imager.aspx?Image=" + String.Format("{0}{1}.{2}.{3}&ImageOutputWidth={4}", sUpDir, this._shopShop.Id, tShopProduct.Id, filename, sImageOutputWidth);
+        }
 
-            return sReturn;
+        public string GetShopCommentCount(object o)
+        {
+            ShopProduct product = o as ShopProduct;
+            string strReturn = this._module.GetCommentCount(product)[0].ToString();
+            return strReturn;
         }
 
 	}
